@@ -21,6 +21,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.location.places.PlaceBuffer;
@@ -95,9 +96,11 @@ public class  PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Pla
 
         TextView nameTextView;
         TextView addressTextView;
+        RelativeLayout relativeLayout;
 
         public PlaceViewHolder(View itemView) {
             super(itemView);
+            relativeLayout=(RelativeLayout) itemView.findViewById(R.id.relativeId);
             nameTextView = (TextView) itemView.findViewById(R.id.name_text_view);
             addressTextView = (TextView) itemView.findViewById(R.id.address_text_view);
         }

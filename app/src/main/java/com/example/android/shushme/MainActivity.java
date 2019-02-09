@@ -34,7 +34,9 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private GoogleApiClient mClient;
     private Geofencing mGeofencing;
     private boolean isEnabled;
+    //private ActionMode mActionMode;
 
     /**
      * Called when the activity is starting
@@ -80,6 +83,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+
 
         // Set up the recycler view
         mRecyclerView = (RecyclerView) findViewById(R.id.places_list_recycler_view);
@@ -112,8 +119,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         mGeofencing = new Geofencing(this, mClient);
 
+//        implementListViewClickListeners();
+//
+   }
 
-    }
+//    private void implementListViewClickListeners() {
+//
+//
+//
+//    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {

@@ -48,15 +48,16 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 
     private void setRingerMode(Context context, int mode){
         NotificationManager nm = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-        if(Build.VERSION.SDK_INT >= 24 || (Build.VERSION.SDK_INT >= 24 && !nm.isNotificationPolicyAccessGranted())) {
+        if(Build.VERSION.SDK_INT < 24 || (Build.VERSION.SDK_INT >= 24 && !nm.isNotificationPolicyAccessGranted())) {
             AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             audioManager.setRingerMode(mode);
         }
     }
 
     private void sendNotification(Context context, int transitionType){
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         Intent intent = new Intent(context, MainActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+
         stackBuilder.addParentStack(MainActivity.class);
         stackBuilder.addNextIntent(intent);
         PendingIntent notificationPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -72,7 +73,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
                     .setContentTitle(context.getString(R.string.back_to_normal));
         }
         builder.setContentIntent(notificationPendingIntent);
-                builder.setContentText(context.getString(R.string.touch_to_relaunch));
+        builder.setContentText(context.getString(R.string.touch_to_relaunch));
         builder.setAutoCancel(true);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0, builder.build());
